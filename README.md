@@ -1,5 +1,5 @@
 # OverTheWire Natas Web Challenges
-This is my journey and personal challenge of finishing the Natas web series from Over The Wire. THe goal here is to let the script do as much of the work as possible.
+This is my journey and personal challenge of finishing the Natas web series from Over The Wire. The goal here is to let the script do as much of the work as possible.
 
 ## Usage
 ```
