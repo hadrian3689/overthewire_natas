@@ -1,7 +1,7 @@
 import requests
 import sys
 
-def flag(url,username,password):
+def extract(url,username,password):
     site = requests.get(url,auth=(username,password))
     if site.status_code == 401:
         print("Wrong credentials")
@@ -29,4 +29,4 @@ if __name__=="__main__":
     url = "http://natas16.natas.labs.overthewire.org/"
     username = "natas16"
     password = "TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V"
-    flag(url,username,password)
+    extract(url,username,password)
