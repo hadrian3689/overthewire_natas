@@ -32,7 +32,7 @@ def extract(url,username,password,flag):
                 break
         extract(url,username,password,flag)
     else:
-        print(f"\rThe flag for natas15 is:  {flag.ljust(20)}") 
+        print(f"\rThe flag for natas17 is:  {flag.ljust(20)}") 
 
 if __name__=="__main__":
     print("Natas 17: Time based SQL Injection. Patience...")

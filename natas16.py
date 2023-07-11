@@ -23,7 +23,7 @@ def extract(url,username,password):
         else:
             flag = flag + alpha_num[letter]
             letter = 0
-    print(f"\rThe flag for natas16 is: {flag.ljust(20)}")
+    print(f"\rThe flag for natas16 is:  {flag.ljust(20)}")
 
 if __name__=="__main__":
     url = "http://natas16.natas.labs.overthewire.org/"
